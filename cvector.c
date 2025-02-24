@@ -49,6 +49,15 @@ int vector_push(Vector *vec, void *new_val) {
   return VEC_SUCCESS;
 }
 
+int vector_push_fw(Vector *vec, void *new_val) {
+  if (!vec) {
+    fprintf(stderr, "vector_push_fw: `vec` can't be NULL\n");
+    return VEC_INPUT_ERR;
+  }
+
+  return vector_insert(vec, 0, new_val);
+}
+
 int vector_insert(Vector *vec, size_t index, void *new_val) {
   if (!vec) {
     fprintf(stderr, "vector_insert: `vec` can't be NULL\n");
@@ -69,8 +78,8 @@ int vector_insert(Vector *vec, size_t index, void *new_val) {
 
   vec->data = data_upd;
   // shift elements
-  memmove(vec->data + index * vec->val_size,
-          vec->data + (index + 1) * vec->val_size,
+  memmove(vec->data + (index + 1) * vec->val_size,
+          vec->data + index * vec->val_size,
           vec->val_size * (vec->length - index));
   if (new_val) {
     memcpy(vec->data + index * vec->val_size, new_val, vec->val_size);
@@ -93,7 +102,7 @@ void *vector_at(Vector *vec, size_t index) {
 
 int vector_clear(Vector *vec) {
   if (!vec) {
-    fprintf(stderr, "vector_clear: `vec` can't be NULL\n");
+    fprintf(stderr, "vector_clear: `vec` can't be NULL.\n");
     return VEC_INPUT_ERR;
   }
 
@@ -104,6 +113,46 @@ int vector_clear(Vector *vec) {
 
   free(vec->data);
   vec->length = 0;
+
+  return VEC_SUCCESS;
+}
+
+int vector_remove(Vector *vec, size_t index) {
+  if (!vec) {
+    fprintf(stderr, "vector_remove: `vec` can't be NULL.\n");
+    return VEC_INPUT_ERR;
+  }
+
+  if (index >= vec->length) {
+    fprintf(stderr, "vector_remove: `index` is out of range.\n");
+    return VEC_RANGE_ERR;
+  }
+
+  if (vec->destructor) {
+    vec->destructor(vec->data + vec->val_size * index);
+  }
+
+  if (index != vec->length - 1) {
+    memmove(vec->data + vec->val_size * index,
+            vec->data + vec->val_size * (index + 1),
+            vec->val_size * (vec->length - index - 1));
+  }
+
+  if (vec->length == 1) {
+    vec->data = NULL;
+    vec->length = 0;
+    return VEC_SUCCESS;
+  }
+
+  char *data_upd =
+      (char *)realloc(vec->data, (vec->length - 1) * vec->val_size);
+  if (!data_upd) {
+    perror("vector_remove: memory reallocation failed");
+    return VEC_MEM_ERR;
+  }
+
+  vec->data = data_upd;
+  vec->length--;
 
   return VEC_SUCCESS;
 }

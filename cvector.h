@@ -27,6 +27,9 @@ typedef struct c_vector {
  * */
 int vector_init(Vector *vec, size_t val_size, void (*destructor)(void *));
 
+/*
+ * Clears memory used by `vec`, but leaves the preferences of vector
+ * */
 int vector_clear(Vector *vec);
 
 int vector_push(Vector *vec, void *new_val);
@@ -34,6 +37,8 @@ int vector_push(Vector *vec, void *new_val);
 int vector_insert(Vector *vec, size_t index, void *new_val);
 
 int vector_push_fw(Vector *vec, void *new_val);
+
+int vector_remove(Vector *vec, size_t index);
 
 void *vector_at(Vector *vec, size_t index);
 
