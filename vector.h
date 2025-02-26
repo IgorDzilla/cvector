@@ -8,6 +8,7 @@ typedef enum VecErrors {
   VEC_INPUT_ERR = -1,
   VEC_MEM_ERR = -2,
   VEC_RANGE_ERR = -3,
+  T_VEC_TYPE_ERR = -4,
 } VecErrors;
 
 typedef struct c_vector Vector;
