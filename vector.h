@@ -41,6 +41,6 @@ int vector_push_fw(Vector *vec, void *new_val);
 
 int vector_remove(Vector *vec, size_t index);
 
-void *vector_at(Vector *vec, size_t index);
+int vector_get(Vector *vec, size_t index, void *val);
 
 #endif // !CVECTOR_H

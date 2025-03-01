@@ -92,65 +92,65 @@ inline int type_err_msg(TypedVector *tvec, void *new_val) {
 #define tvector_push(tvec, new_val)                                            \
   _Generic((tvec),                                                             \
       TypedVector *: _Generic((new_val),                                       \
-                   int *: tvector_push_int,                                    \
-                   long *: tvector_push_long,                                  \
-                   size_t *: tvector_push_size_t,                              \
-                   float *: tvector_push_float,                                \
-                   double *: tvector_push_double,                              \
-                   long double *: tvector_push_long_double,                    \
-                   char **: tvector_push_string,                               \
-                   const char **: tvector_push_string,                         \
-                   default: type_err_msg, ))(tvec, new_val)
-
-#define tvector_get(tvec, index, new_val)                                      \
-  _Generic((tvec),                                                             \
-      TypedVector *: _Generic((new_val),                                       \
-                   int *: tvector_get_int,                                     \
-                   long *: tvector_get_long,                                   \
-                   size_t *: tvector_get_size_t,                               \
-                   float *: tvector_get_float,                                 \
-                   double *: tvector_get_double,                               \
-                   long double *: tvector_get_long_double,                     \
-                   char **: tvector_get_string,                                \
-                   default: type_err_msg))(tvec, index, new_val)
-
-#define tvector_insert(tvec, index, new_val)                                   \
-  _Generic((tvec),                                                             \
-      TypedVector *: _Generic((new_val),                                       \
-                   int *: tvector_insert_int,                                  \
-                   long *: tvector_insert_long,                                \
-                   size_t *: tvector_insert_size_t,                            \
-                   float *: tvector_insert_float,                              \
-                   double *: tvector_insert_double,                            \
-                   long double *: tvector_insert_long_double,                  \
-                   char **: tvector_insert_string,                             \
-                   const char **: tvector_insert_string,                       \
-                   default: type_err_msg))(tvec, index, new_val)
+              int *: tvector_push_int,                                         \
+              long *: tvector_push_long,                                       \
+              size_t *: tvector_push_size_t,                                   \
+              float *: tvector_push_float,                                     \
+              double *: tvector_push_double,                                   \
+              long double *: tvector_push_long_double,                         \
+              char **: tvector_push_string,                                    \
+              const char **: tvector_push_string,                              \
+              default: type_err_msg, ))(tvec, new_val)
 
 #define tvector_push_fw(tvec, new_val)                                         \
   _Generic((tvec),                                                             \
       TypedVector *: _Generic((new_val),                                       \
-                   int *: tvector_push_fw_int,                                 \
-                   long *: tvector_push_fw_long,                               \
-                   size_t *: tvector_push_fw_size_t,                           \
-                   float *: tvector_push_fw_float,                             \
-                   double *: tvector_push_fw_double,                           \
-                   long double *: tvector_push_fw_long_double,                 \
-                   char **: tvector_push_fw_string,                            \
-                   const char **: tvector_push_fw_string,                      \
-                   default: type_err_msg))(tvec, new_val)
+              int *: tvector_push_fw_int,                                      \
+              long *: tvector_push_fw_long,                                    \
+              size_t *: tvector_push_fw_size_t,                                \
+              float *: tvector_push_fw_float,                                  \
+              double *: tvector_push_fw_double,                                \
+              long double *: tvector_push_fw_long_double,                      \
+              char **: tvector_push_fw_string,                                 \
+              const char **: tvector_push_fw_string,                           \
+              default: type_err_msg))(tvec, new_val)
+
+#define tvector_get(tvec, index, new_val)                                      \
+  _Generic((tvec),                                                             \
+      TypedVector *: _Generic((new_val),                                       \
+              int *: tvector_get_int,                                          \
+              long *: tvector_get_long,                                        \
+              size_t *: tvector_get_size_t,                                    \
+              float *: tvector_get_float,                                      \
+              double *: tvector_get_double,                                    \
+              long double *: tvector_get_long_double,                          \
+              char **: tvector_get_string,                                     \
+              default: type_err_msg))(tvec, index, new_val)
+
+#define tvector_insert(tvec, index, new_val)                                   \
+  _Generic((tvec),                                                             \
+      TypedVector *: _Generic((new_val),                                       \
+              int *: tvector_insert_int,                                       \
+              long *: tvector_insert_long,                                     \
+              size_t *: tvector_insert_size_t,                                 \
+              float *: tvector_insert_float,                                   \
+              double *: tvector_insert_double,                                 \
+              long double *: tvector_insert_long_double,                       \
+              char **: tvector_insert_string,                                  \
+              const char **: tvector_insert_string,                            \
+              default: type_err_msg))(tvec, index, new_val)
 
 #define tvector_remove(tvec, new_val)                                          \
   _Generic((tvec),                                                             \
       TypedVector *: _Generic((new_val),                                       \
-                   int *: tvector_remove_int,                                  \
-                   long *: tvector_remove_long,                                \
-                   size_t *: tvector_remove_size_t,                            \
-                   float *: tvector_remove_float,                              \
-                   double *: tvector_remove_double,                            \
-                   long double *: tvector_remove_long_double,                  \
-                   char **: tvector_remove_string,                             \
-                   const char **: tvector_remove_string,                       \
-                   default: type_err_msg))(tvec, new_val)
+              int *: tvector_remove_int,                                       \
+              long *: tvector_remove_long,                                     \
+              size_t *: tvector_remove_size_t,                                 \
+              float *: tvector_remove_float,                                   \
+              double *: tvector_remove_double,                                 \
+              long double *: tvector_remove_long_double,                       \
+              char **: tvector_remove_string,                                  \
+              const char **: tvector_remove_string,                            \
+              default: type_err_msg))(tvec, new_val)
 
 #endif

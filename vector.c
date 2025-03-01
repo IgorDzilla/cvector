@@ -90,13 +90,14 @@ int vector_insert(Vector *vec, size_t index, void *new_val) {
   return VEC_SUCCESS;
 }
 
-void *vector_at(Vector *vec, size_t index) {
+int vector_get(Vector *vec, size_t index, void *value) {
   if (index >= vec->length) {
-    fprintf(stderr, "vector_at: `index` out of boundaries\n");
-    return NULL;
+    fprintf(stderr, "vector_get: `index` out of boundaries\n");
+    return VEC_RANGE_ERR;
   }
 
-  return (void *)(vec->data + index * vec->val_size);
+  value = (void *)(vec->data + index * vec->val_size);
+  return VEC_SUCCESS;
 }
 
 int vector_clear(Vector *vec) {
